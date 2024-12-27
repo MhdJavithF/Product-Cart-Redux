@@ -34,7 +34,7 @@ const ProductListPage = ({setOpen}) => {
           border-2 border-black rounded-full 
           p-2.5 bg-black text-white 
           left-10
-          hover:scale-105 absolute  
+          hover:scale-105  
           sm:top-16 sm:left-10 md:top-15 md:left-10 
           lg:top-15 lg:left-20 fixed
         " 
