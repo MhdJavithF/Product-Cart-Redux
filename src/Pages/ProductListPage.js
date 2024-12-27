@@ -36,7 +36,7 @@ const ProductListPage = ({setOpen}) => {
           left-10
           hover:scale-105 absolute  
           sm:top-16 sm:left-10 md:top-15 md:left-10 
-          lg:top-15 lg:left-20
+          lg:top-15 lg:left-20 fixed
         " 
         onClick={handleButtonClick}
       >
