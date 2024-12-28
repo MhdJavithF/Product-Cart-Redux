@@ -1,16 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setProducts } from '../Reducers/productList.reducer'
 import { addToCart } from '../Reducers/cart.reducer';
 import { PiShoppingCartBold } from "react-icons/pi";
 import Pagination from '../Component/Pagination';
+import '../App.css';
 
 const ProductListPage = ({setOpen}) => {
   
   const products = useSelector(state => state.productList.list);
   const cartProducts = useSelector(state => state.cart.items);
   const dispatch = useDispatch();
-
+  const [shake, setShake] = useState(false);
+ 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
     .then(res => res.json())
@@ -20,6 +22,11 @@ const ProductListPage = ({setOpen}) => {
   const handleAddToCart = (e) => {
     const productID = e.target.dataset.id;
     dispatch(addToCart(productID));
+    animeCart();
+  }
+
+  const animeCart = () => {
+    setShake(true);
   }
 
   const handleButtonClick = () => {
@@ -28,21 +35,21 @@ const ProductListPage = ({setOpen}) => {
 
   return (
     <>
-      <button 
-        className="
+      <button
+        className={`
           flex items-center justify-center gap-2 
           border-2 border-black rounded-full 
           p-2.5 bg-black text-white 
-          left-10
-          hover:scale-105  
+          left-10 hover:scale-105  
           sm:top-16 sm:left-10 md:top-15 md:left-10 
           lg:top-15 lg:left-20 fixed
-        " 
+          ${shake ? "wiggle" : ""}
+        `}
         onClick={handleButtonClick}
+        onAnimationEnd={() => setShake(false)}
       >
         <PiShoppingCartBold className="text-2xl md:text-3xl lg:text-4xl" />
-        {/* <p className="text-sm md:text-base lg:text-lg font-bold">Cart Details</p> */}
-      </button>  
+      </button>
       <h2 className="sr-only">Products</h2>
     <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 border-2">
 
